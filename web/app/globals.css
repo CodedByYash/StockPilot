@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/*
+  DESIGN SYSTEM — "Ledger"
+
+  Subject: stock ledger for SMB/D2C inventory operators. The visual world
+  comes from paper ledgers, ink stamps, and ruled columns — not generic
+  SaaS gradients. Deliberately not cream+terracotta or near-black+acid-green.
+
+  Palette (named, not just hex-soup):
+    ink       #14171F  — page background, deep ink-navy, not pure black
+    surface   #1C212C  — card/panel background, one step up from ink
+    surface-2 #242B38  — hover/nested surface
+    rule      #313A4A  — hairline dividers, ledger rule lines
+    paper     #EDEDEA  — primary text, warm off-white like aged paper
+    paper-dim #9CA3B0  — secondary text
+    amber     #D9A441  — stock signal / reorder-suggested (ink-stamp gold)
+    amber-dim #4A3D22  — amber's dark surface for badges
+    teal      #4FAE8D  — healthy stock / positive movement
+    teal-dim  #1E3A32  — teal's dark surface for badges
+    red       #E0645A  — critical / low-stock / outbound
+    red-dim   #3D2020  — red's dark surface for badges
+
+  Type:
+    display — a serif system stack (Georgia/Iowan/Times), used sparingly
+              for page titles and the stamp signature, evoking a ledger's
+              printed headers. Never used for body copy or data.
+    body    — a clean system sans-serif for everything you read.
+    mono    — a system monospace for anything you count: SKUs, quantities,
+              costs. Tabular figures matter here — this is a ledger.
+
+  Signature element: the "stamp" — a rotated, ink-bordered badge used for
+  alerts (low stock / reorder suggested), styled like a rubber ink stamp
+  on a paper ledger page. See components/Stamp.tsx.
+
+  Fonts are system stacks on purpose, not next/font/google — this keeps
+  the build fully offline-capable (no font fetch at build time) and avoids
+  any FOUT/latency for users.
+*/
+
+:root {
+  --color-ink: #14171f;
+  --color-surface: #1c212c;
+  --color-surface-2: #242b38;
+  --color-rule: #313a4a;
+  --color-paper: #ededea;
+  --color-paper-dim: #9ca3b0;
+  --color-amber: #d9a441;
+  --color-amber-dim: #4a3d22;
+  --color-teal: #4fae8d;
+  --color-teal-dim: #1e3a32;
+  --color-red: #e0645a;
+  --color-red-dim: #3d2020;
+
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-rule: var(--color-rule);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-amber: var(--color-amber);
+  --color-amber-dim: var(--color-amber-dim);
+  --color-teal: var(--color-teal);
+  --color-teal-dim: var(--color-teal-dim);
+  --color-red: var(--color-red);
+  --color-red-dim: var(--color-red-dim);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-feature-settings: "tnum" 1; /* tabular numerals everywhere by default */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ruled ledger line — used as a section divider, evokes ruled paper */
+.rule-line {
+  border-top: 1px solid var(--color-rule);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
