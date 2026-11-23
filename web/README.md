@@ -75,7 +75,7 @@ no external font fetch and no FOUT.
 
 ```bash
 cd web
-cp .env.local.example .env.local   # points NEXT_PRIVATE_API_URL at the API
+cp .env.local.example .env.local   # points NEXT_PUBLIC_API_URL at the API
 npm install
 npm run dev                         # http://localhost:3000
 ```

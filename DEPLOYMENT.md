@@ -57,10 +57,10 @@ Copy the printed token.
 1. New Vercel project, same repo, **Root Directory = `web`** (Next.js is detected).
 2. Environment variables:
 
-   | Name                   | Value                                          |
-   | ---------------------- | ---------------------------------------------- |
-   | `NEXT_PRIVATE_API_URL` | `/api`                                         |
-   | `API_ORIGIN`           | `https://<api>.vercel.app` (no trailing slash) |
+   | Name                  | Value                                          |
+   | --------------------- | ---------------------------------------------- |
+   | `NEXT_PUBLIC_API_URL` | `/api`                                         |
+   | `API_ORIGIN`          | `https://<api>.vercel.app` (no trailing slash) |
 
    The browser calls `/api/*` on the web domain and Vercel forwards it to the API (`web/next.config.ts`). This keeps the login cookie first-party, which a separate API domain would not (Safari and strict Chrome block third-party cookies). Both values are read at **build** time, so redeploy the web project after changing them.
 
@@ -114,6 +114,6 @@ claude.ai's "custom connector" UI uses OAuth rather than a fixed bearer header, 
 ## Troubleshooting
 
 - **A Vercel login page instead of JSON from the API or MCP URL:** Deployment Protection is on for that deployment. Project Settings > Deployment Protection, and use the production domain or turn it off for those two projects.
-- **Login works but the next page says unauthorized:** the web project is calling the API directly. Check `NEXT_PRIVATE_API_URL=/api` and redeploy.
+- **Login works but the next page says unauthorized:** the web project is calling the API directly. Check `NEXT_PUBLIC_API_URL=/api` and redeploy.
 - **`502`/`ENOTFOUND` from `/api/...`:** `API_ORIGIN` was missing or wrong at build time. Fix it and redeploy.
 - **Cron shows 401:** `CRON_SECRET` isn't set on the API project.
