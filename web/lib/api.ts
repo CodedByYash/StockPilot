@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PRIVATE_API_URL ?? "http://localhost:4000";
+const API_URL = process.env.NEXT_PRIVATE_API_URL ?? "/api";
 
 export class ApiError extends Error {
   status: number;
