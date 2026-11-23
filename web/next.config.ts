@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   // forwards it to the API. That keeps the httpOnly auth cookie first-party
   // (a cookie set by a different *.vercel.app domain is a third-party cookie
   // and is blocked by Safari and by Chrome's stricter modes), and removes
-  // the need for CORS. In production set NEXT_PUBLIC_API_URL=/api.
+  // the need for CORS. In production set NEXT_PRIVATE_API_URL=/api.
   async rewrites() {
     return [{ source: "/api/:path*", destination: `${API_ORIGIN}/:path*` }];
   },

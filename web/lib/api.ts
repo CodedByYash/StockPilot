@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const API_URL = process.env.NEXT_PRIVATE_API_URL ?? "http://localhost:4000";
 
 export class ApiError extends Error {
   status: number;
@@ -20,7 +20,10 @@ interface RequestOptions {
  * set by the API's /auth/login is sent automatically — the frontend never
  * touches the token directly.
  */
-export async function apiFetch<T>(path: string, options: RequestOptions = {}): Promise<T> {
+export async function apiFetch<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<T> {
   // Plain string concatenation, not `new URL(path, API_URL)`: a base like
   // "/api" (the same-origin proxy used on Vercel, see next.config.ts) is
   // relative, and URL() would both reject it and drop its path prefix.
